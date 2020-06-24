@@ -1,12 +1,13 @@
-import Config from './config';
 import axios from 'axios';
+const url = process.env.REACT_APP_URL;
+const dev = process.env.REACT_APP_DEV === 'true';
 
 axios.defaults.withCredentials = true;
 
 const Fetch = async (type, endpoint, body, token, auth) => {
   let response;
   let error = null;
-  const url = `${Config.url}${endpoint}`;
+  const urlEndpoint = `${url}${endpoint}`;
 
   const headers = {
     'Content-Type': 'application/json',
@@ -21,7 +22,7 @@ const Fetch = async (type, endpoint, body, token, auth) => {
 
   var config = {
     method: type,
-    url: url,
+    url: urlEndpoint,
     headers: headers,
     auth,
   };
@@ -33,8 +34,8 @@ const Fetch = async (type, endpoint, body, token, auth) => {
   await axios(config)
     .then(async (res) => {
       response = await res.data;
-      if (Config.DEV) {
-        console.log(url);
+      if (dev) {
+        console.log(urlEndpoint);
         console.log(response);
       }
     })
