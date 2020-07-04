@@ -4,7 +4,7 @@ const express = require('express');
 const AnimeService = require('../services/animes');
 const validationHandler = require('../utils/middleware/validationHandler');
 const scopesValidationHandler = require('../utils/middleware/scopesValidationHandler');
-const cacheResponse = require('../utils/cacheResponse');
+// const cacheResponse = require('../utils/cacheResponse');
 const {
   animeIdSchema,
   createAnimeSchema,
@@ -27,7 +27,7 @@ const AnimesApi = (app) => {
     // authMiddleware,
     // scopesValidationHandler(['read:animes']),
     async (req, res, next) => {
-      cacheResponse(res, FIVE_MINUTES_IN_SECONDS);
+      // cacheResponse(res, FIVE_MINUTES_IN_SECONDS);
       const { tags, order, week, status } = req.query;
 
       try {
@@ -52,7 +52,7 @@ const AnimesApi = (app) => {
     '/:animeId',
     validationHandler(animeIdSchema, 'params'),
     async (req, res, next) => {
-      cacheResponse(res, SIXTY_MINUTES_IN_SECONDS);
+      // cacheResponse(res, SIXTY_MINUTES_IN_SECONDS);
       const { animeId } = req.params;
 
       try {

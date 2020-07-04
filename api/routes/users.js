@@ -4,7 +4,7 @@ const express = require('express');
 const UsersService = require('../services/users');
 const validationHandler = require('../utils/middleware/validationHandler');
 const scopesValidationHandler = require('../utils/middleware/scopesValidationHandler');
-const cacheResponse = require('../utils/cacheResponse');
+// const cacheResponse = require('../utils/cacheResponse');
 const {
   userIdSchema,
   createUserSchema,
@@ -27,7 +27,7 @@ const UsersApi = (app) => {
     authMiddleware,
     scopesValidationHandler(['read:users']),
     async (req, res, next) => {
-      cacheResponse(res, FIVE_MINUTES_IN_SECONDS);
+      // cacheResponse(res, FIVE_MINUTES_IN_SECONDS);
       const { tags } = req.query;
 
       try {
@@ -49,7 +49,7 @@ const UsersApi = (app) => {
     scopesValidationHandler(['read:users']),
     validationHandler(userIdSchema, 'params'),
     async (req, res, next) => {
-      cacheResponse(res, SIXTY_MINUTES_IN_SECONDS);
+      // cacheResponse(res, SIXTY_MINUTES_IN_SECONDS);
       const { userId } = req.params;
 
       try {
